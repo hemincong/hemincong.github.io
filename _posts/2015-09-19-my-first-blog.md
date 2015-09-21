@@ -1,3 +1,9 @@
+---
+layout: post
+title: 我的第一篇日志，口水下 
+permalink: /firstBlog/
+---
+
 我的第一篇日志，口水下
 ======
 
