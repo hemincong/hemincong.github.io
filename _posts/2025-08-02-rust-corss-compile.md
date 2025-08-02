@@ -1,4 +1,6 @@
-== rust 的 target
+# rust跨平台编译
+
+## rust 的 target
 
 先安装需要的target
 
@@ -18,7 +20,8 @@ linker="/home/mincong/Work/Buildroot_2020.02.x/output/host/bin/arm-buildroot-lin
 ```cmd
 cargo build --target armv7-unknown-linux-gnueabihf
 ```
-== lib depending
+
+## lib depending  
 
 然而他好像不会找cc的sysroot，实际上，还是要拿一次sysroot
 
@@ -40,7 +43,7 @@ export PKG_CONFIG_SYSROOT_DIR=/home/mincong/Work/Buildroot_2020.02.x/output/stag
 cargo build --target=armv7-unknown-linux-gnueabihf -p sdf-test
 ```
 
-== bindgen
+## bindgen
 
 跨平台，会提示一个bits/libc-header-start.h找不到，改了很多环境变量都不行，又要强制指定一下clang_arg
 
@@ -66,14 +69,13 @@ msys2上要安装libclang的库，具体那个忘了
 LIBCLANG_PATH=D:\msys64\mingw64\bin;PATH=D:\msys64\mingw64\bin
 ```
 
-== build.rs
+## build.rs
 
 其实很多应该可以用build.rs里面的println!("cargo:") 来做环境设置
 
-```rust`
+```rust
 println!("cargo:include=/home/mincong/Work/Buildroot_2020.02.x/output/staging/usr/include");
 println!("cargo:rerun-if-changed=./include/GMT0033.h");
-
 ```
 
 * cargo:rustc-link-search=<path>  添加库搜索路径  -L /path/to/libs
@@ -86,5 +88,4 @@ println!("cargo:rerun-if-changed=./include/GMT0033.h");
 
 * cargo:rerun-if-changed=<file>   监控文件变化，触发 rebuild
 
-诸如此类，但没仔细再测
-
+诸如此类
